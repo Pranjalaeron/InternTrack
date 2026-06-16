@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API = "http://localhost:8000/api/auth";
+const API = "https://interntrack-vmff.onrender.com/api/auth";
 
 const getToken = () => {
   return localStorage.getItem("token");
