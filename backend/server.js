@@ -20,7 +20,7 @@ const app = express();
 app.use(
   cors({
     origin: [
-      "http://localhost:5173",
+      "https://localhost:5173",
       "https://intern-track-nine-mu.vercel.app",
     ],
     credentials: true,
