@@ -16,10 +16,12 @@ export default function Login() {
       setLoading(true);
 
       console.log("Sending request to:");
-      console.log("http://localhost:8000/api/auth/login");
+      console.log(
+        "http://https://interntrack-vmff.onrender.com/api/auth/login",
+      );
 
       const response = await axios.post(
-        "http://localhost:8000/api/auth/login",
+        "http://https://interntrack-vmff.onrender.com/api/auth/login",
         {
           email,
           password,

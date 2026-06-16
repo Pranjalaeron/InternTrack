@@ -18,7 +18,7 @@ export default function Signup() {
       setLoading(true);
 
       const response = await axios.post(
-        "http://localhost:8000/api/auth/signup",
+        "http://https://interntrack-vmff.onrender.com/api/auth/signup",
         {
           name,
           email,
