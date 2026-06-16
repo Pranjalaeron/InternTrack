@@ -17,11 +17,11 @@ export default function Login() {
 
       console.log("Sending request to:");
       console.log(
-        "http://https://interntrack-vmff.onrender.com/api/auth/login",
+        "http://interntrack-vmff.onrender.com/api/auth/login",
       );
 
       const response = await axios.post(
-        "http://https://interntrack-vmff.onrender.com/api/auth/login",
+        "http://interntrack-vmff.onrender.com/api/auth/login",
         {
           email,
           password,
