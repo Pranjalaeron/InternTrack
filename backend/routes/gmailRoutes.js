@@ -7,10 +7,20 @@ const protect = require("../middleware/authMiddleware");
 const {
   connectGmail,
   gmailCallback,
+  getEmails,
 } = require("../controllers/gmailController");
 
-router.get("/connect", protect, connectGmail);
+router.get("/emails", protect, getEmails);
 
-router.get("/callback", gmailCallback);
+router.get("/connect", connectGmail);
+
+router.get(
+  "/callback",
+  (req, res, next) => {
+    console.log("CALLBACK ROUTE HIT");
+    next();
+  },
+  gmailCallback,
+);
 
 module.exports = router;

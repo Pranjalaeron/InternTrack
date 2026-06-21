@@ -1,12 +1,16 @@
 const express = require("express");
 const cors = require("cors");
-const authRoutes = require("./routes/authRoutes");
-const gmailRoutes = require("./routes/gmailRoutes");
 require("dotenv").config();
 
+const authRoutes = require("./routes/authRoutes");
+const gmailRoutes = require("./routes/gmailRoutes");
+const emailRoutes = require("./routes/emailRoutes");
 const applicationRoutes = require("./routes/applicationRoutes");
 
 const connectDB = require("./config/db");
+
+// Start cron job
+require("./jobs/gmailJob");
 
 connectDB()
   .then(() => {
@@ -20,9 +24,11 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+
 app.use("/api/auth", authRoutes);
 app.use("/api/applications", applicationRoutes);
 app.use("/api/gmail", gmailRoutes);
+app.use("/api/emails", emailRoutes);
 
 app.get("/", (req, res) => {
   res.send("InternTrack Backend Running 🚀");

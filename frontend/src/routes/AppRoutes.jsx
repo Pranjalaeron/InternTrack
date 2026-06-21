@@ -8,6 +8,7 @@ import Analytics from "../pages/Analytics";
 import Profile from "../pages/Profile";
 import EditProfile from "../pages/EditProfile";
 import ProtectedRoute from "./ProtectedRoute";
+import Emails from "../pages/Emails";
 export default function AppRoutes() {
   return (
     <Routes>
@@ -51,6 +52,14 @@ export default function AppRoutes() {
         element={
           <ProtectedRoute>
             <Profile />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/emails"
+        element={
+          <ProtectedRoute>
+            <Emails />
           </ProtectedRoute>
         }
       />

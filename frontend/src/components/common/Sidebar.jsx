@@ -61,6 +61,17 @@ export default function Sidebar() {
         </NavLink>
 
         <NavLink
+          to="/emails"
+          className={({ isActive }) =>
+            isActive
+              ? "bg-indigo-600 text-white p-3 rounded-xl"
+              : "text-zinc-300 hover:text-white hover:bg-zinc-800 p-3 rounded-xl transition"
+          }
+        >
+          Emails
+        </NavLink>
+
+        <NavLink
           to="/profile"
           className={({ isActive }) =>
             isActive
