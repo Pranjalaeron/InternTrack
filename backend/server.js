@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const authRoutes = require("./routes/authRoutes");
+const gmailRoutes = require("./routes/gmailRoutes");
 require("dotenv").config();
 
 const applicationRoutes = require("./routes/applicationRoutes");
@@ -17,18 +18,11 @@ connectDB()
 
 const app = express();
 
-app.use(
-  cors({
-    origin: [
-      "https://localhost:5173",
-      "https://intern-track-nine-mu.vercel.app",
-    ],
-    credentials: true,
-  }),
-);
+app.use(cors());
 app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/applications", applicationRoutes);
+app.use("/api/gmail", gmailRoutes);
 
 app.get("/", (req, res) => {
   res.send("InternTrack Backend Running 🚀");
