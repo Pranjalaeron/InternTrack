@@ -48,32 +48,17 @@ cron.schedule("*/5 * * * *", async () => {
         const subject = headers.find((h) => h.name === "Subject")?.value || "";
 
         const from = headers.find((h) => h.name === "From")?.value || "";
-        let companyName = from.split("<")[0].trim();
-
-        companyName = companyName
-          .replace("Careers", "")
-          .replace("Jobs", "")
-          .trim();
-
-          await Application.create({
-            user: user._id,
-            company: companyName,
-            role: subject,
-            status,
-            deadline: null,
-            notes: snippet,
-            gmailId: msg.id,
-          });
 
         const snippet = email.data.snippet || "";
 
-        // Ignore promotional senders
+        // Ignore promotional emails
         const ignoreSenders = [
           "resumeworded",
           "openai",
           "chatgpt",
           "naukri",
           "unstop.news",
+          "render",
         ];
 
         if (
@@ -82,7 +67,6 @@ cron.schedule("*/5 * * * *", async () => {
           continue;
         }
 
-        // Ignore emails without subject
         if (!subject) {
           continue;
         }
@@ -131,20 +115,29 @@ cron.schedule("*/5 * * * *", async () => {
 
         console.log("Internship Email Found:", status);
 
-        // Prevent duplicate entries
+        // Prevent duplicates
         const exists = await Application.findOne({
           gmailId: msg.id,
         });
 
         if (exists) {
+          console.log("Duplicate email skipped");
           continue;
         }
 
+        // Extract company name
+        let companyName = from.split("<")[0].trim();
+
+        companyName = companyName
+          .replace("Careers", "")
+          .replace("Jobs", "")
+          .trim();
+
         await Application.create({
           user: user._id,
-          company: from,
+          company: companyName,
           role: subject,
-          status,
+          status: status,
           deadline: null,
           notes: snippet,
           gmailId: msg.id,
@@ -156,5 +149,9 @@ cron.schedule("*/5 * * * *", async () => {
   } catch (error) {
     console.log("CRON ERROR:");
     console.log(error.message);
+
+    if (error.response) {
+      console.log(error.response.data);
+    }
   }
 });
