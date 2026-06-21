@@ -129,8 +129,9 @@ cron.schedule("*/5 * * * *", async () => {
         let companyName = from.split("<")[0].trim();
 
         companyName = companyName
-          .replace("Careers", "")
-          .replace("Jobs", "")
+          .replace(/careers/i, "")
+          .replace(/jobs/i, "")
+          .replace(/hiring team/i, "")
           .trim();
 
         await Application.create({
