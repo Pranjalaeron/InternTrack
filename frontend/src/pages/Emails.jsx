@@ -10,11 +10,14 @@ export default function Emails() {
   const fetchEmails = async () => {
     const token = localStorage.getItem("token");
 
-    const response = await fetch("http://localhost:8000/api/gmail/emails", {
-      headers: {
-        Authorization: `Bearer ${token}`,
+    const response = await fetch(
+      "https://interntrack-vmff.onrender.com/api/gmail/emails",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       },
-    });
+    );
 
     const data = await response.json();
 

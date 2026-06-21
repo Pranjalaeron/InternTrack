@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import Sidebar from "../components/common/Sidebar";
 
 import { getProfile, updateProfile } from "../services/authService";
-
 import { getApplications } from "../services/applicationService";
 
 export default function Profile() {
@@ -65,10 +64,11 @@ export default function Profile() {
     }
   };
 
+  // FIXED FUNCTION
   const connectGmail = () => {
     const token = localStorage.getItem("token");
 
-    window.location.href = `http://localhost:8000/api/gmail/connect?token=${token}`;
+    window.location.href = `https://interntrack-vmff.onrender.com/api/gmail/connect?token=${token}`;
   };
 
   const totalApplications = applications.length;
@@ -117,6 +117,7 @@ export default function Profile() {
               <h2 className="text-3xl font-bold">{user.name}</h2>
 
               <p className="text-zinc-400">InternTrack User</p>
+
               {user.gmailConnected && (
                 <p className="text-green-500 mt-2">
                   ✅ Gmail Connected: {user.gmailEmail}
@@ -193,30 +194,24 @@ export default function Profile() {
             </div>
           </div>
 
-          {/* Stats */}
-
           <div className="grid md:grid-cols-4 gap-4 mt-10">
             <div className="bg-zinc-800 p-5 rounded-xl">
               <p className="text-zinc-400">Applications</p>
-
               <h3 className="text-2xl font-bold mt-2">{totalApplications}</h3>
             </div>
 
             <div className="bg-zinc-800 p-5 rounded-xl">
               <p className="text-zinc-400">Interviews</p>
-
               <h3 className="text-2xl font-bold mt-2">{interviews}</h3>
             </div>
 
             <div className="bg-zinc-800 p-5 rounded-xl">
               <p className="text-zinc-400">Offers</p>
-
               <h3 className="text-2xl font-bold mt-2">{offers}</h3>
             </div>
 
             <div className="bg-zinc-800 p-5 rounded-xl">
               <p className="text-zinc-400">Rejected</p>
-
               <h3 className="text-2xl font-bold mt-2">{rejected}</h3>
             </div>
           </div>
